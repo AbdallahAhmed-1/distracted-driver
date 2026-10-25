@@ -13,6 +13,7 @@ names = {'c0': 'Safe driving', 'c1': 'Texting - right', 'c2': 'Phone - right',
          'c6': 'Drinking', 'c7': 'Reaching behind', 'c8': 'Hair/makeup',
          'c9': 'Talking to passenger'}
 
+@spaces.GPU
 def predict(img):
     if img is None:
         return None
