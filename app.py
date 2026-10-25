@@ -1,14 +1,21 @@
+from fastai.vision.all import *
 import gradio as gr
-import spaces
-import torch
 
-zero = torch.Tensor([0]).cuda()
-print(zero.device) # <-- 'cpu' 🤔
 
-@spaces.GPU
-def greet(n):
-    print(zero.device) # <-- 'cuda:0' 🤗
-    return f"Hello {zero + n} Tensor"
+learn = load_learner('export.pkl')
+labels = learn.dls.vocab
 
-demo = gr.Interface(fn=greet, inputs=gr.Number(), outputs=gr.Text())
+
+def predict(img):
+    img = PILImage.create(img)
+    pred, idx, probs = learn.predict(img)
+    return {labels[i]: float(probs[i]) for i in range(len(labels))}
+
+
+demo = gr.Interface(
+    fn=predict,
+    inputs=gr.Image(),
+    outputs=gr.Label(num_top_classes=5),
+    examples=['example1.jpg'],  # optional; remove if you have none
+)
 demo.launch()
