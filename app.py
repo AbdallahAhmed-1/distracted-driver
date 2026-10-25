@@ -1,7 +1,9 @@
 from fastai.vision.all import *
 import gradio as gr
+import torch
+learn = torch.load('export.pkl', map_location='cpu', weights_only=False)
 
-learn = load_learner('export.pkl')
+# learn = load_learner('export.pkl')
 learn.to_fp32()                      # safe for CPU inference
 labels = learn.dls.vocab
 
