@@ -1,6 +1,7 @@
 from fastai.vision.all import *
 import gradio as gr
 import torch
+import spaces
 import pathlib, sys
 sys.modules['pathlib._local'] = pathlib
 
