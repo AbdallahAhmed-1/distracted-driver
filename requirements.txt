@@ -1,4 +1,4 @@
 fastai==2.7.19
-torch==2.5.1
+torch
 gradio==5.29.0
 spaces
