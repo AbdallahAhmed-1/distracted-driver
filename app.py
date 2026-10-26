@@ -3,6 +3,8 @@ import numpy as np
 import torch
 import gradio as gr
 from PIL import Image
+import spaces
+
 
 model = torch.jit.load('model.pt', map_location='cpu').eval()
 vocab = json.load(open('vocab.json'))
@@ -25,6 +27,7 @@ def preprocess(img):
     x = (np.asarray(img, dtype=np.float32) / 255 - mean) / std
     return torch.from_numpy(x).permute(2, 0, 1).unsqueeze(0)
 
+@spaces.GPU
 def predict(img):
     if img is None:
         return None
