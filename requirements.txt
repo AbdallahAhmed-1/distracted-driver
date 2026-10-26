@@ -1,4 +1,4 @@
-fastai==2.7.19
+fastai
 torch
-gradio==5.29.0
+gradio
 spaces
